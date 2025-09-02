@@ -5,10 +5,21 @@ import EventEmitter  from 'events';
 const myEvents = new EventEmitter();
 
 myEvents.on('greet', (arg) => {
-  console.log(`Kaise ho ${arg.username}? ${arg.mgs}`);
+  console.log(`How are you ${arg.username} ? ${arg.mgs}`);
+
+  myEvents.emit('hellow',arg.username)
 });
 
+myEvents.on('hellow', (username) => {
+  console.log(`${username} I am fine !`);
+});
+
+function tell (){
+  console.log("hi")
+}
+
 export default myEvents;
+// export default {myEvents,tell};
 
 
 // myEvents.on('greet',()=>{
