@@ -1,24 +1,87 @@
+// const http = require('http');
+// // Start the server first
+// const server = http.createServer((req, res) => {
+//     if (req.method === 'GET') {
+//         let body = '';
+//         req.on('data', (chunk) => {
+//             body += chunk.toString();
+//         });
+//         // res.setHeader('body', body)
+//         req.on('end', () => {
+//             res.writeHead(200, { 'Content-Type': 'application/json' });
+//             res.end(JSON.stringify({
+//                 message: 'Server received request',
+//                 method: req.method,
+//                 url: req.url,
+//                 body : body
+//                 // body: body ? JSON.parse(body) : {}
+//             }));
+//         });
+//     }
+// });
+// server.listen(8081, () => {
+//     console.log('✅ Server running at http://localhost:8081');
+//     // Once server is ready, fire the client request
+//     const options = {
+//         hostname: 'localhost',
+//         port: 8081,
+//         path: '/',
+//         method: 'GET',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     };
+//     const req = http.request(options, (res) => {
+//         let data = '';
+//         res.on('data', (chunk) => {
+//             data += chunk.toString();
+//         });
+//         res.on('end', () => console.log('Response from server:', data));
+//     });
+//     // Send body in GET (non-standard)
+//     req.write(JSON.stringify({ name: 'Ruchit', age: 22 }));
+//     req.end();
+// });
+
+
+
 const http = require('http');
-// Start the server first
+const url = require('url');
+
+// Start the server
 const server = http.createServer((req, res) => {
   if (req.method === 'GET') {
+    // Parse query params
+    const query = url.parse(req.url, true).query;
+
     let body = '';
     req.on('data', chunk => body += chunk);
-    res.setHeader('body', body)
+
+    // ✅ Always fire on 'end', even if body is empty
     req.on('end', () => {
+      let parsedBody = {};
+      try {
+        parsedBody = body ? JSON.parse(body) : {};
+      } catch (err) {
+        parsedBody = { error: "Invalid JSON" };
+      }
+
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({
         message: 'Server received request',
         method: req.method,
         url: req.url,
-        body: body ? JSON.parse(body) : {}
+        query: query,       // browser data
+        body: parsedBody    // node client body
       }));
     });
-  } 
+  }
 });
+
 server.listen(8081, () => {
   console.log('✅ Server running at http://localhost:8081');
-  // Once server is ready, fire the client request
+
+  // Fire a Node client request for testing
   const options = {
     hostname: 'localhost',
     port: 8081,
@@ -28,15 +91,23 @@ server.listen(8081, () => {
       'Content-Type': 'application/json'
     }
   };
+
   const req = http.request(options, (res) => {
     let data = '';
     res.on('data', chunk => data += chunk);
-    res.on('end', () => console.log('Response from server:', data));
+    res.on('end', () => {
+      console.log('Response from server (Node client):', data || '[empty response]');
+    });
   });
-  // Send body in GET (non-standard)
+
+  // Send body in GET (non-standard, but allowed in Node client)
   req.write(JSON.stringify({ name: 'Ruchit', age: 22 }));
   req.end();
 });
+
+
+
+
 
 
 // const http = require('http');
