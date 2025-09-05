@@ -1,0 +1,5 @@
+
+1756991041659: GET /api/users - 15ms
+1756991041998: GET /favicon.ico - 2ms
+1756991062122: GET /users - 7ms
+1756991066827: GET /users - 1ms

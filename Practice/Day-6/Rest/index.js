@@ -17,21 +17,44 @@ app.use(cors({
     methods: ['POST', 'PATCH', 'DELETE']
 }));
 
-
 app.use((req, res, next) => {
-    console.log("Hellow form the Middleware 1");
-    req.myUserName= "Ruchit.Pitaliya"
-    fs.appendFile('log.txt',`\n ${Date.now()}: ${req.ip}: ${req.method}: ${req.path}`, (error,data)=>{
+    // console.log("Hellow form the Middleware 1");
+    // req.myUserName= "Ruchit.Pitaliya"
+    fs.appendFile('log.txt',`\n Timestamp: ${Date.now()}: IP: ${req.ip}: Method: ${req.method}: Url Path: ${req.path}`, (error,data)=>{
         next();
     });
     next();
 });
+
+function apiKeyAuth(req, res, next) {
+    const apiKey = req.headers['x-api-key'];
+    if (apiKey !== "apikey") {
+        console.log(`${req.ip} Has not Provided Proper key or Header` )
+        let respose = res.status(401).json({ Status: "Unauthorized" });
+        return respose
+    }
+    next();
+}
+
 app.use((req, res, next) => {
-    console.log("Hellow form the Middleware 2 ", req.myUserName);
+    // console.log("Hellow form the Middleware 2 ", req.myUserName);
     console.log(`${req.ip}: ${req.method}: ${req.path}: ${res.statusCode}`);
     next();
 });
 
+// Request Timing Middleware
+// app.use((req, res, next) => {
+//     const start = Date.now();
+//     res.on("finish", () => {
+//         const duration = Date.now() - start;
+//         console.log(`${req.method} ${req.originalUrl} took ${duration}ms`);
+//         fs.appendFileSync("timing_log.txt", 
+//             `\n${Date.now()}: ${req.method} ${req.originalUrl} - ${duration}ms`
+//         );
+//     });
+
+//     next();
+// });
 
 app.get('/users', (req, res) => {
     const html = `
@@ -50,7 +73,8 @@ app.get('/api/users/:id', (req, res) => {
     return res.json(user);
 });
 
-app.get('/api/users', (req, res) => {
+app.get('/api/users',apiKeyAuth,(req, res) => {
+    console.log(req.statusCode)
     return res.json(users);
 })
 
