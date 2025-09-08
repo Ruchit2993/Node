@@ -1,0 +1,15 @@
+
+ Timestamp: 1757330600779: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 404
+ Timestamp: 1757330607905: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 401
+ Timestamp: 1757330608896: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 401
+ Timestamp: 1757330617784: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 200
+ Timestamp: 1757334559910: IP: 127.0.0.1: Method: GET: Url Path: /5: Status: 200
+ Timestamp: 1757334637985: IP: 127.0.0.1: Method: GET: Url Path: /5: Status: 200
+ Timestamp: 1757334647687: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 200
+ Timestamp: 1757334692158: IP: 127.0.0.1: Method: DELETE: Url Path: /api/users/1007: Status: 500
+ Timestamp: 1757334759504: IP: 127.0.0.1: Method: DELETE: Url Path: /1007: Status: 200
+ Timestamp: 1757334826206: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 404
+ Timestamp: 1757334832525: IP: 127.0.0.1: Method: GET: Url Path: /api/users: Status: 404
+ Timestamp: 1757334836389: IP: 127.0.0.1: Method: GET: Url Path: /api/users/: Status: 404
+ Timestamp: 1757334864659: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 401
+ Timestamp: 1757334930322: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200

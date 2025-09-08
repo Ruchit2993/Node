@@ -1,0 +1,35 @@
+
+ Timestamp: 1757306816507: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757306816722: IP: 127.0.0.1: Method: GET: Url Path: /favicon.ico
+ Timestamp: 1757306822144: IP: 127.0.0.1: Method: GET: Url Path: /users
+ Timestamp: 1757306856651: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757307265820: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757307275469: IP: 127.0.0.1: Method: GET: Url Path: /users
+ Timestamp: 1757307372054: IP: 127.0.0.1: Method: GET: Url Path: /
+ Timestamp: 1757307384837: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757307549085: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757307559665: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757307569317: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757307575905: IP: 127.0.0.1: Method: GET: Url Path: /users
+ Timestamp: 1757307583713: IP: 127.0.0.1: Method: GET: Url Path: /users
+ Timestamp: 1757307585952: IP: 127.0.0.1: Method: GET: Url Path: /users
+ Timestamp: 1757307599529: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757307607317: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757307619124: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757307639155: IP: 127.0.0.1: Method: GET: Url Path: /users
+ Timestamp: 1757307645766: IP: 127.0.0.1: Method: GET: Url Path: /users/5
+ Timestamp: 1757307649631: IP: 127.0.0.1: Method: GET: Url Path: /users
+ Timestamp: 1757307714456: IP: 127.0.0.1: Method: GET: Url Path: /api/users/5
+ Timestamp: 1757307718387: IP: 127.0.0.1: Method: GET: Url Path: /api/users/555
+ Timestamp: 1757307721096: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757308471336: IP: 127.0.0.1: Method: GET: Url Path: /api/users
+ Timestamp: 1757308502215: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 401
+ Timestamp: 1757308518956: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 200
+ Timestamp: 1757309674626: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 404
+ Timestamp: 1757309682523: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 401
+ Timestamp: 1757309688835: IP: 127.0.0.1: Method: GET: Url Path: /users: Status: 200
+ Timestamp: 1757326149157: IP: 127.0.0.1: Method: GET: Url Path: /users: Status: 304
+ Timestamp: 1757326158655: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 401
+ Timestamp: 1757326159734: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 401
+ Timestamp: 1757330501140: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 401
+ Timestamp: 1757330510388: IP: 127.0.0.1: Method: GET: Url Path: /: Status: 404
