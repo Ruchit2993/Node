@@ -3,7 +3,7 @@
     "id": 1,
     "first_name": "Bryna",
     "last_name": "Reijmers",
-    "email": "patch.com",
+    "email": "patch2.com",
     "gender": "Female",
     "job_title": "Staff Scientist"
   },
@@ -8055,5 +8055,29 @@
     "job_title": "CEO",
     "id": 1007,
     "deleted": true
+  },
+  {
+    "first_name": "Ruchit",
+    "last_name": "Pitaliya",
+    "email": "abc@gmail.com",
+    "gender": "male",
+    "id": 1010,
+    "deleted": true
+  },
+  {
+    "first_name": "Ruchit",
+    "last_name": "Pitaliya",
+    "email": "abc@gmail.com",
+    "gender": "male",
+    "job_title": "CEO",
+    "id": 1011
+  },
+  {
+    "first_name": "Ruchit",
+    "last_name": "Pitaliya",
+    "email": "abc@gmail.com",
+    "gender": "male",
+    "job_title": "CEO",
+    "id": 1012
   }
 ]

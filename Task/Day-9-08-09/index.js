@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
-import usersRoute from "./routes/users.js";
+import usersRoute from "./src/routes/users.js";
 import users from "./MOCK_DATA.json" with { type: "json" };
-import logger from "./middlewares/logger.js";
-import requestLogger from "./middlewares/requestLogger.js";
+import logger from "./src/middlewares/logger.js";
+import requestLogger from "./src/middlewares/requestLogger.js";
 
 const app = express();
 const port = 8000;

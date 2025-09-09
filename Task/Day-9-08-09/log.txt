@@ -13,3 +13,25 @@
  Timestamp: 1757334836389: IP: 127.0.0.1: Method: GET: Url Path: /api/users/: Status: 404
  Timestamp: 1757334864659: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 401
  Timestamp: 1757334930322: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200
+ Timestamp: 1757391178375: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200
+ Timestamp: 1757391574386: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200
+ Timestamp: 1757393711985: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200
+ Timestamp: 1757394291863: IP: 127.0.0.1: Method: GET: Url Path: /api/users/get-all: Status: 500
+ Timestamp: 1757394365811: IP: 127.0.0.1: Method: GET: Url Path: /api/users/get-all: Status: 500
+ Timestamp: 1757394380037: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200
+ Timestamp: 1757394475265: IP: 127.0.0.1: Method: POST: Url Path: /: Status: 200
+ Timestamp: 1757394494088: IP: 127.0.0.1: Method: POST: Url Path: /: Status: 200
+ Timestamp: 1757394550532: IP: 127.0.0.1: Method: POST: Url Path: /api/users: Status: 200
+ Timestamp: 1757394559450: IP: 127.0.0.1: Method: POST: Url Path: /: Status: 200
+ Timestamp: 1757394768589: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200
+ Timestamp: 1757394770805: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200
+ Timestamp: 1757394783284: IP: 127.0.0.1: Method: POST: Url Path: /: Status: 200
+ Timestamp: 1757394818196: IP: 127.0.0.1: Method: PATCH: Url Path: /1: Status: 200
+ Timestamp: 1757394841826: IP: 127.0.0.1: Method: GET: Url Path: /users: Status: 200
+ Timestamp: 1757394858589: IP: 127.0.0.1: Method: GET: Url Path: /5: Status: 200
+ Timestamp: 1757394873601: IP: 127.0.0.1: Method: DELETE: Url Path: /1008: Status: 200
+ Timestamp: 1757394896115: IP: 127.0.0.1: Method: DELETE: Url Path: /1008: Status: 200
+ Timestamp: 1757394914413: IP: 127.0.0.1: Method: DELETE: Url Path: /1009: Status: 200
+ Timestamp: 1757394927835: IP: 127.0.0.1: Method: DELETE: Url Path: /1009: Status: 404
+ Timestamp: 1757394933860: IP: 127.0.0.1: Method: DELETE: Url Path: /1008: Status: 404
+ Timestamp: 1757394939621: IP: 127.0.0.1: Method: DELETE: Url Path: /1010: Status: 200
