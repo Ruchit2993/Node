@@ -1,0 +1,19 @@
+{
+  "name": "day-11_10-09",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "R:/Dev IT/Node/Task/Day-11_10-09/src/app/index.js",
+  "scripts": {
+    "start": "nodemon src/app/index.js"
+  },
+  "keywords": [],
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.5",
+    "nodemon": "^3.1.10",
+    "sequelize": "^6.37.7"
+  }
+}
