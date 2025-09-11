@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import express from 'express';
 import router from '../modules/user/route/route.js'
 import {
@@ -7,11 +8,16 @@ import {
 import { User } from '../model/user-model.js';
 import { UserDetails } from '../model/user-details.js';
 import { Company } from "../model/company-model.js";
-import {Employee}  from "../model/employee-model.js";
-const PORT = 8085;
+import { Employee } from "../model/employee-model.js";
+import companyRouter from "../modules/company/route/company-route.js";
+import employeeRouter from "../modules/employee/route/employee-route.js";
+dotenv.config();
+const PORT = process.env.PORT
+// 8085;
 const app = express();
-
 app.use('/', router);
+app.use("/companies", companyRouter);
+app.use("/employees", employeeRouter);
 // sequelize.sync({force:true})
 
 // await User.sync({ force: true })
@@ -19,7 +25,7 @@ app.use('/', router);
 // await Company.sync({ force: true })
 // await Employee.sync({ force: true })
 
-await sequelize.sync({force: true})
+await sequelize.sync({ force: true })
 // await sequelize.sync({alert: true})
 
 // console.log('The table for the User model was just (re)created!');
@@ -28,35 +34,35 @@ await sequelize.sync({force: true})
 
 const companies = await Company.bulkCreate(
     [
-        { 
-            cmpName: "Dev IT", 
-            address: "14 Aaryan Corporate Park", 
-            description: "Software Services", 
-            status: "active", 
-            createdBy: "system" 
+        {
+            cmpName: "Dev IT",
+            address: "14 Aaryan Corporate Park",
+            description: "Software Services",
+            status: "active",
+            createdBy: "system"
         },
-        { 
-            cmpName: "E-Infochips", 
-            address: "15 Aaryan Corporate Park", 
-            description: "Chip Design", 
-            status: "active", 
-            createdBy: "system" 
+        {
+            cmpName: "E-Infochips",
+            address: "15 Aaryan Corporate Park",
+            description: "Chip Design",
+            status: "active",
+            createdBy: "system"
         },
-        { 
-            cmpName: "Ecubics", 
-            address: "15 Aaryan Corporate Park", 
-            description: "Digital Solutions", 
-            status: "active", 
-            createdBy: "system" 
+        {
+            cmpName: "Ecubics",
+            address: "15 Aaryan Corporate Park",
+            description: "Digital Solutions",
+            status: "active",
+            createdBy: "system"
 
         },
-        { 
-            cmpName: "Febinacci", 
-            address: "15 Aaryan Corporate Park", 
-            description: "Consulting", 
-            status: "active", 
-            createdBy: "system" 
-            
+        {
+            cmpName: "Febinacci",
+            address: "15 Aaryan Corporate Park",
+            description: "Consulting",
+            status: "active",
+            createdBy: "system"
+
         },
     ],
 );
