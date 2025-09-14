@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Server Health & API Documentation</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 2rem; }
+    .container { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #ccc; padding: 2rem; }
+    h1 { color: #2e8b57; }
+    .health { font-size: 1.2rem; margin-bottom: 2rem; }
+    .api-section { margin-bottom: 2rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #ddd; padding: 0.5rem; }
+    th { background: #2e8b57; color: #fff; }
+    tr:nth-child(even) { background: #f2f2f2; }
+    code { background: #eee; padding: 2px 4px; border-radius: 4px; }
+    .endpoint { margin-bottom: 2rem; }
+    .endpoint h3 { margin-bottom: 0.5rem; }
+    .endpoint pre { background: #f4f4f4; padding: 1rem; border-radius: 6px; }
+    .status { font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🚀 Server Health: <span style="color:green;">Good</span></h1>
+    <div class="health">
+      <strong>Status:</strong> All systems operational.<br>
+      <strong>Uptime:</strong> <span id="uptime"></span>
+    </div>
+    <div class="api-section">
+      <h2>API Endpoints</h2>
+      <table>
+        <tr>
+          <th>Method</th>
+          <th>Endpoint</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>GET</td>
+          <td><code>/users</code></td>
+          <td>Get all users</td>
+        </tr>
+        <tr>
+          <td>POST</td>
+          <td><code>/users</code></td>
+          <td>Register a new user</td>
+        </tr>
+        <tr>
+          <td>GET</td>
+          <td><code>/users/:id/details</code></td>
+          <td>Get user with company details</td>
+        </tr>
+        <tr>
+          <td>GET</td>
+          <td><code>/companies/:id/users</code></td>
+          <td>Get company with its users</td>
+        </tr>
+        <tr>
+          <td>GET</td>
+          <td><code>/profiles</code></td>
+          <td>Get all profiles</td>
+        </tr>
+        <tr>
+          <td>POST</td>
+          <td><code>/profiles</code></td>
+          <td>Create a profile</td>
+        </tr>
+        <tr>
+          <td>POST</td>
+          <td><code>/profiles/seed</code></td>
+          <td>Seed profiles (for testing)</td>
+        </tr>
+        <tr>
+          <td>POST</td>
+          <td><code>/auth/login-bcrypt</code></td>
+          <td>Login with bcrypt (no JWT)</td>
+        </tr>
+        <tr>
+          <td>POST</td>
+          <td><code>/auth/login-jwt</code></td>
+          <td>Login and get JWT token</td>
+        </tr>
+        <tr>
+          <td>POST</td>
+          <td><code>/auth/login-session</code></td>
+          <td>Login and create session</td>
+        </tr>
+      </table>
+    </div>
+    <div class="api-section">
+      <h2>Detailed API Documentation</h2>
+      <div class="endpoint">
+        <h3>GET /users</h3>
+        <div><span class="status">200 OK</span></div>
+        <pre>
+Request: None
+Response:
+{
+  "success": true,
+  "message": "All user data Retrived sucessfully ...",
+  "data": [ /* Array of users */ ]
+}
+        </pre>
+      </div>
+      <div class="endpoint">
+        <h3>POST /users</h3>
+        <div><span class="status">201 Created</span></div>
+        <pre>
+Request:
+{
+  "userName": "John Doe",
+  "userEmail": "john@example.com",
+  "userId": 1
+}
+Response:
+{
+  "success": true,
+  "message": "User Created sucessfully ...",
+  "data": {
+    "userId": 1,
+    "userName": "John Doe",
+    "userEmail": "john@example.com"
+  }
+}
+        </pre>
+      </div>
+      <div class="endpoint">
+        <h3>GET /users/:id/details</h3>
+        <div><span class="status">200 OK</span> | <span class="status">404 Not Found</span></div>
+        <pre>
+Request: None
+Response:
+{
+  "success": true,
+  "data": { /* User object with companyDetails */ }
+}
+        </pre>
+      </div>
+      <div class="endpoint">
+        <h3>POST /auth/login-bcrypt</h3>
+        <div><span class="status">200 OK</span> | <span class="status">401 Unauthorized</span></div>
+        <pre>
+Request:
+{
+  "email": "john@example.com",
+  "password": "yourpassword"
+}
+Response:
+{
+  "success": true,
+  "message": "Login successful",
+  "data": {
+    "id": 1,
+    "email": "john@example.com"
+  }
+}
+        </pre>
+      </div>
+      <div class="endpoint">
+        <h3>POST /auth/login-jwt</h3>
+        <div><span class="status">200 OK</span> | <span class="status">401 Unauthorized</span></div>
+        <pre>
+Request:
+{
+  "email": "john@example.com",
+  "password": "yourpassword"
+}
+Response:
+{
+  "success": true,
+  "message": "Login successful",
+  "data": {
+    "token": "JWT_TOKEN"
+  }
+}
+        </pre>
+      </div>
+      <div class="endpoint">
+        <h3>POST /auth/login-session</h3>
+        <div><span class="status">200 OK</span> | <span class="status">401 Unauthorized</span></div>
+        <pre>
+Request:
+{
+  "email": "john@example.com",
+  "password": "yourpassword"
+}
+Response:
+{
+  "success": true,
+  "message": "Login successful (session)",
+  "data": {
+    "id": 1,
+    "email": "john@example.com"
+  }
+}
+        </pre>
+      </div>
+      <div class="endpoint">
+        <h3>GET /profiles</h3>
+        <div><span class="status">200 OK</span></div>
+        <pre>
+Response:
+{
+  "success": true,
+  "data": [ /* Array of profiles */ ]
+}
+        </pre>
+      </div>
+      <div class="endpoint">
+        <h3>POST /profiles</h3>
+        <div><span class="status">201 Created</span></div>
+        <pre>
+Request:
+{
+  "bio": "Full Stack Developer",
+  "userId": 1
+}
+Response:
+{
+  "success": true,
+  "message": "Profile created successfully",
+  "data": { /* Profile object */ }
+}
+        </pre>
+      </div>
+      <div class="endpoint">
+        <h3>POST /profiles/seed</h3>
+        <div><span class="status">201 Created</span></div>
+        <pre>
+Response:
+{
+  "success": true,
+  "message": "Profiles seeded successfully"
+}
+        </pre>
+      </div>
+      <div class="endpoint">
+        <h3>GET /companies/:id/users</h3>
+        <div><span class="status">200 OK</span> | <span class="status">404 Not Found</span></div>
+        <pre>
+Response:
+{
+  "success": true,
+  "data": { /* Company object with Users array */ }
+}
+        </pre>
+      </div>
+    </div>
+    <div class="api-section">
+      <h2>Usage</h2>
+      <ul>
+        <li>All endpoints accept and return JSON.</li>
+        <li>Authentication endpoints support bcrypt, JWT, and session-based login.</li>
+        <li>See <code>/profiles/seed</code> for test data seeding.</li>
+        <li>Use <code>Authorization: Bearer &lt;token&gt;</code> for JWT-protected endpoints (if implemented).</li>
+      </ul>
+    </div>
+    <footer>
+      <p>Made with ❤️ for Node.js & Sequelize Demo</p>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('uptime').textContent = (Math.floor(performance.now()/1000)) + ' seconds';
+  </script>
+</body>
+</html>

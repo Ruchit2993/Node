@@ -1,11 +1,36 @@
+import { Sequelize } from "sequelize";
+import { sequelize } from "../config/dbConnect.js";
 import { Company } from "../model/company-model.js";
 import { Employee } from "../model/employee-model.js";
+
+// const getCompaniesWithEmployees = async (req, res) => {
+//   try {
+//     const companies = await Company.findAll({
+//       include: [{ 
+//         model: Employee 
+//       }],
+//     });
+//     res.json(companies);
+//   } catch (err) {
+//     res.status(500).json({ error: err.message });
+//   }
+// };
+
 
 const getCompaniesWithEmployees = async (req, res) => {
   try {
     const companies = await Company.findAll({
-      include: [{ 
-        model: Employee 
+      attributes: [
+        "id",
+        "cmpname",
+        "status",
+        [Sequelize.col("emp.id"),"empid"],
+        [Sequelize.col("emp.empName"),"empName"]
+      ],
+      include: [{
+        model: Employee,
+        as: "emp",
+        attributes: []
       }],
     });
     res.json(companies);
@@ -17,8 +42,8 @@ const getCompaniesWithEmployees = async (req, res) => {
 const getCompanyById = async (req, res) => {
   try {
     const company = await Company.findByPk(req.params.id, {
-      include: [{ 
-        model: Employee 
+      include: [{
+        model: Employee
       }],
     });
 

@@ -54,10 +54,14 @@ Employee.init(
 );
 
 Company.hasMany(Employee,
-  { foreignKey: "companyId" }
+  { as:"emp",
+    foreignKey: "companyId"
+    
+   }
 );
 Employee.belongsTo(Company,
-  { foreignKey: "companyId" }
+  { as:"cmp",
+    foreignKey: "companyId" }
 );
 
 export { Employee };
