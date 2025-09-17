@@ -35,3 +35,10 @@
  Timestamp: 1757394927835: IP: 127.0.0.1: Method: DELETE: Url Path: /1009: Status: 404
  Timestamp: 1757394933860: IP: 127.0.0.1: Method: DELETE: Url Path: /1008: Status: 404
  Timestamp: 1757394939621: IP: 127.0.0.1: Method: DELETE: Url Path: /1010: Status: 200
+ Timestamp: 1758015356005: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200
+ Timestamp: 1758015362485: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 401
+ Timestamp: 1758015390173: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 401
+ Timestamp: 1758015396009: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200
+ Timestamp: 1758015435275: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200
+ Timestamp: 1758015441220: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 401
+ Timestamp: 1758015446365: IP: 127.0.0.1: Method: GET: Url Path: /get-all: Status: 200

@@ -19,6 +19,8 @@ Employee.init(
         key: "id",
       },
       // onDelete: "CASCADE",
+
+      
     },
     empName: {
       type: DataTypes.STRING,
