@@ -1,80 +1,108 @@
 import { sequelize } from "../config/dbConnect.js";
 import { DataTypes, Model } from "sequelize";
+import TeamMember from "./team-member-model.js";
+import Task from "./task-model.js";
 
-const User = sequelize.define("User", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-    allowNull: false,
+class User extends Model {}
+
+User.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    contact: {
+      type: DataTypes.STRING(12),
+      allowNull: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    isAdmin: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 1,
+    },
+    isFirstLogin: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    status: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 1,
+    },
+    deleted: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    updatedBy: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    deletedBy: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
-  name: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-    // unique: true,
-  },
-  contact: {
-    type: DataTypes.STRING(12),
-    allowNull: true,
-    // unique: true,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  isAdmin: {
-    type: DataTypes.TINYINT,
-    allowNull: false,
-    defaultValue: 1,
-  },
-  isFirstLogin: {
-    type: DataTypes.TINYINT,
-    allowNull: false,
-    defaultValue: 0,
-  },
-  status: {
-    type: DataTypes.TINYINT,
-    allowNull: false,
-    defaultValue: 1,
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-  deletedAt: {
-    type: DataTypes.DATE,
-    allowNull: true,
-  },
-  createdBy: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  updatedBy: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  deletedBy: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-}, {
-  tableName: "users",   // table name in DB
-  timestamps: true,    // we’re handling timestamps manually
-  underscored: true,    // match snake_case columns
-  paranoid: false,      // you already have deleted_at handling
-  indexes: [
-    { unique: true, fields: ["email"] },
-    { unique: true, fields: ["contact"] }
-  ]
-});
+  {
+    sequelize,
+    modelName: "User",
+    tableName: "users",
+    timestamps: true,
+    underscored: true,
+    paranoid: false,
+    indexes: [
+      { unique: true, fields: ["email"] },
+      { unique: true, fields: ["contact"] },
+    ],
+  }
+);
+
+// Associations0
+User.hasMany(TeamMember, { foreignKey: "userId" });
+TeamMember.belongsTo(User, { foreignKey: "userId" });
+TeamMember.belongsTo(Task, { foreignKey: "taskId" });
+
+User.hasMany(Task, { foreignKey: "createdBy", as: "createdTasks" });
+User.hasMany(Task, { foreignKey: "updatedBy", as: "updatedTasks" });
+User.hasMany(Task, { foreignKey: "deletedBy", as: "deletedTasks" });
+
+Task.belongsTo(User, { foreignKey: "createdBy", as: "creator" });
+Task.belongsTo(User, { foreignKey: "updatedBy", as: "updater" });
+Task.belongsTo(User, { foreignKey: "deletedBy", as: "deleter" });
+
 
 export default User;
 

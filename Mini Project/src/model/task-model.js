@@ -1,75 +1,79 @@
 import { sequelize } from "../config/dbConnect.js";
 import { DataTypes, Model } from "sequelize";
+// import User from "./user-model.js";
+// import TeamMember from "./team-member-model.js";
+import StatusMaster from "./status-master-model.js";
 
-const Task = sequelize.define("Task", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-    allowNull: false,
+class Task extends Model {}
+
+Task.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    status: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
+    dueDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    deleted: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    updatedBy: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    deletedBy: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
-  // FK to Status Master
-  statusId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  statusCode: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-  },
-  // Basic task details
-  name: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-  },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
-  // Task assignments
-  assignedBy: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  assignedTo: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  dueDate: {
-    type: DataTypes.DATE,
-    allowNull: true,
-  },
-  // Metadata
-  createdAt: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-  },
-  deletedAt: {
-    type: DataTypes.DATE,
-    allowNull: true,
-  },
-  createdBy: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  updatedBy: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  deletedBy: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-}, {
-  tableName: "tasks",
-  timestamps: true,     // enables createdAt & updatedAt
-  underscored: true,    // snake_case columns
-  paranoid: false,      // you already have deleted_at
-});
+  {
+    sequelize,
+    modelName: "Task",
+    tableName: "tasks",
+    timestamps: true,
+    underscored: true,
+    paranoid: false,
+  }
+);
+
+Task.belongsTo(StatusMaster, { foreignKey: "status", targetKey: "code" });
+StatusMaster.hasMany(Task, { foreignKey: "status", sourceKey: "code" });
 
 export default Task;
 

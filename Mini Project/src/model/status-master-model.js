@@ -1,68 +1,79 @@
 import { sequelize } from "../config/dbConnect.js";
 import { DataTypes, Model } from "sequelize";
+// import Task from "./task-model.js";
 
-const StatusMaster = sequelize.define("StatusMaster", {
-  statusId: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-    allowNull: false,
-    field: "status_id",
+class StatusMaster extends Model {}
+
+StatusMaster.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
+    code: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: "TO_DO",
+    },
+    name: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      defaultValue: "To Do",
+    },
+    status: {
+      type: DataTypes.TINYINT,
+      allowNull: true,
+      defaultValue: 1,
+    },
+    deleted: {
+      type: DataTypes.TINYINT,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    updatedBy: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    deletedBy: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
-  code: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-    defaultValue: "TO_DO",   // default value from dictionary
-  },
-  statusName: {
-    type: DataTypes.STRING(50),
-    allowNull: false,
-    defaultValue: "to_do",
-    field: "status_name",
-  },
-  status: {
-    type: DataTypes.TINYINT,
-    allowNull: true,
-    defaultValue: 1,   // 1 = active, 0 = inactive
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-    field: "created_at",
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW,
-    field: "updated_at",
-  },
-  deletedAt: {
-    type: DataTypes.DATE,
-    allowNull: true,
-    field: "deleted_at",
-  },
-  createdBy: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    field: "created_by",
-  },
-  updatedBy: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    field: "updated_by",
-  },
-  deletedBy: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    field: "deleted_by",
-  },
-}, {
-  tableName: "status_master",
-  timestamps: true,    // enables createdAt & updatedAt
-  underscored: true,   // snake_case column names
-  paranoid: false,     // manual deleted_at
-});
+  {
+    sequelize,
+    modelName: "StatusMaster",
+    tableName: "status_master",
+    timestamps: true,
+    underscored: true,
+    paranoid: false,
+      indexes: [
+    { unique: true, fields: ["code"] }
+      ]
+  }
+);
 
 export default StatusMaster;
+
 
 /*
 Executing (default): CREATE TABLE IF NOT EXISTS `status_master` (`status_id` INTEGER NOT NULL auto_increment ,
