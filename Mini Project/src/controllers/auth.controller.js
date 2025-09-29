@@ -1,4 +1,4 @@
-import User from '../model/user-model.js';
+import User from '../model/user.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import messages from '../config/messages.js';
@@ -22,13 +22,16 @@ const register = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const userCount = await User.count({ where: { deleted: 0 } });
+    const isAdmin = userCount === 0 ? 1 : 0;
+
     const user = await User.create({
       name,
       email,
       contact,
       password: hashedPassword,
       isFirstLogin: 1,
-      isAdmin: 0,
+      isAdmin,
       status: 1,
       deleted: 0,
     });
@@ -74,15 +77,15 @@ const login = async (req, res) => {
 };
 
 const changePassword = async (req, res) => {
-  const { oldPassword, newPassword, confirmPassword } = req.body;
+  const { oldPassword, newPassword } = req.body;
 
-  if (!oldPassword || !newPassword || !confirmPassword) {
-    return res.status(400).json({ message: messages.ERROR.NEWPASS_CONFPASS });
+  if (!oldPassword || !newPassword) {
+    return res.status(400).json({ message: messages.ERROR.NEWPASS_OLDPASS });
   }
 
-  if (newPassword !== confirmPassword) {
-    return res.status(400).json({ message: messages.ERROR.PASSWORD_NOT_MATCH });
-  }
+  // if (newPassword !== confirmPassword) {
+  //   return res.status(400).json({ message: messages.ERROR.PASSWORD_NOT_MATCH });
+  // }
 
   try {
     const user = await User.findOne({ where: { id: req.user.id, deleted: 0 } });
@@ -110,15 +113,15 @@ const changePassword = async (req, res) => {
 };
 
 const firstChangePassword = async (req, res) => {
-  const { newPassword, confirmPassword } = req.body;
+  const { newPassword } = req.body;
 
-  if (!newPassword || !confirmPassword) {
-    return res.status(400).json({ message: messages.ERROR.NEWPASS_CONFPASS });
+  if (!newPassword) {
+    return res.status(400).json({ message: messages.ERROR.NEWPASS });
   }
 
-  if (newPassword !== confirmPassword) {
-    return res.status(400).json({ message: messages.ERROR.PASSWORD_NOT_MATCH });
-  }
+  // if (newPassword !== confirmPassword) {
+  //   return res.status(400).json({ message: messages.ERROR.PASSWORD_NOT_MATCH });
+  // }
 
   try {
     const user = await User.findOne({ where: { id: req.user.id, deleted: 0 } });
@@ -157,7 +160,7 @@ const forgotPassword = async (req, res) => {
       return res.status(404).json({ message: messages.ERROR.USER_NOT_FOUND });
     }
 
-    return res.status(200).json({ message: messages.INFO.REDIRECT_CHANGE_PASS });
+    return res.status(200).json({ message: messages.ERROR.REDIRECT_CHANGE_PASS });
   } catch (error) {
     return res.status(500).json({ message: messages.ERROR.SERVER_ERROR, error: error.message });
   }
